@@ -6,7 +6,7 @@ import (
 	"github.com/wusphinx/crypto/modes"
 )
 
-func AESDecrypt(crypted, key []byte) ([]byte, error) {
+func AESDecryptECB(crypted, key []byte) ([]byte, error) {
 	block, err := aes.NewCipher(key)
 	if err != nil {
 		return nil, err
@@ -19,7 +19,7 @@ func AESDecrypt(crypted, key []byte) ([]byte, error) {
 	return origData, nil
 }
 
-func AESEncrypt(src, key []byte) ([]byte, error) {
+func AESEncryptECB(src, key []byte) ([]byte, error) {
 	block, err := aes.NewCipher(key)
 	if err != nil {
 		return nil, err

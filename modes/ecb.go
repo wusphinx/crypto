@@ -1,4 +1,3 @@
-// refer: https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Electronic_Codebook_(ECB)
 // refer: https://gist.github.com/yinheli/3370e0e901329b639be4
 
 package modes

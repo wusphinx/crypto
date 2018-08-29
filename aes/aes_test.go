@@ -2,16 +2,14 @@ package aes_test
 
 import (
 	"bytes"
-	"crypto/rand"
 	"testing"
 
 	"github.com/wusphinx/crypto/aes"
+	"github.com/wusphinx/crypto/modes"
 )
 
 func getKeyBySize(size int) []byte {
-	key := make([]byte, size)
-	_, _ = rand.Read(key)
-	return key
+	return modes.GenKeyBySize(size)
 }
 
 func TestAes(t *testing.T) {
@@ -24,18 +22,18 @@ func TestAes(t *testing.T) {
 		text := []byte("aes")
 		t.Logf("key:%v", key)
 
-		cipherText, err := aes.AESEncrypt(text, key)
+		cipherText, err := aes.AESEncryptECB(text, key)
 		if err != nil {
-			t.Fatalf("AESEncrypt err:%s", err.Error())
+			t.Fatalf("AESEncryptECB err:%s", err.Error())
 		}
 
-		originData, err := aes.AESDecrypt(cipherText, key)
+		originData, err := aes.AESDecryptECB(cipherText, key)
 		if err != nil {
-			t.Fatalf("AESDecrypt err:%s", err.Error())
+			t.Fatalf("AESDecryptECB err:%s", err.Error())
 		}
 
 		if bytes.Compare(text, originData) != 0 {
-			t.Fatalf("The Implemention of AES Algorithm is not correct text:%s, originData:%s", string(text), string(originData))
+			t.Fatalf("The Implemention of AES ECB Algorithm is not correct text:%s, originData:%s", string(text), string(originData))
 		}
 	}
 }
